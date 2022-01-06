@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+    <title>TakeNote | {{ request.user }}</title>
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/notes.css' %}">
+    
+{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+
+    <div class="title">
+        <h1 onmouseenter="raiseAnchor()" onmouseleave="lowerAnchor()" class="headerAnchor" id="headerAnchor" onclick="redirectIndex()">TakeNote</h1>    </div>
+    <div class="pageTitle">
+        <h1>Welcome back, {{ request.user }}</h1>       
+    </div>
+
+    <div class="logout">
+        <a href="/notes/">Notes</a>
+        <br>
+        <a href="/logout">Logout</a>
+    </div>
+
+</div>
+
+    <h3 style="text-align: center;">Hey {{ request.user }}, sorry you can't see this yet :(,
+        i'm still working on this feature.
+    </h3>
+{% endblock %}

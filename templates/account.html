@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+    <title>TakeNote | {{ request.user }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'account.css' %}">
+    
+
+{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="title">
+            <h1>TakeNote</h1>
+        </div>
+        <div class="logout">
+            <a href="/logout">Logout</a>
+            <a href="/notes/">Notes</a>
+        </div>
+        <div class="pageTitle">
+            <h1>{{ request.user }} account overview</h1>       
+        </div>
+    </div>
+
+    <div class="info">
+        {% for i in user %}
+        <form action="/account/update" method="POST"> {% csrf_token %}
+            <input type="text" name="username" value="{{ i.username }}">
+            <br>
+            <input type="text" name="email" value="{{ i.email }}">
+            <br>
+            <input type="password" name="password" placeholder="New Password">
+            <br>
+            <input type="password" name="confirmPassw" placeholder="Confirm New Password">
+            <br>
+            <button type="submit">Save</button>
+        </form>
+    {% endfor %}
+    </div>
+
+    <br>
+    {% for message in messages %}
+        <strong>{{ message }}</strong>
+        <br>
+    {% endfor %}
+
+    
+{% endblock %}

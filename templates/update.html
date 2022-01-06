@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+    <title>TakeNote | Note Editing</title>
+    {% load static %}
+    <script src="{% static 'js/main.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/notes.css' %}">
+    
+
+{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+
+    <div class="title">
+        <h1 class="headerAnchor" onclick="redirectIndex()">TakeNote</h1>
+    </div>
+
+    <div class="pageTitle">
+        <h1>{{ request.user }}'s note</h1>       
+    </div>
+
+    <div class="logout">
+        <a href="/account/">Account</a>
+        <br>
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</div>
+
+    {% for i in note %}
+        <div id="" class="newNote">
+            <form action="/notes/update/{{ i.id }}/submit" method="POST"> {% csrf_token %}
+                <input type="text" name="title" value="{{ i.title }}">
+                <br>
+                <textarea name="text" id="text" cols="30" rows="10">{{ i.text }}</textarea>
+                <br>
+                <button type="submit">Submit</button>
+            </form>   
+        </div>
+        <br>
+        <button style="text-align: center;" onclick="redirectNotes()">Cancel</button>
+    {% endfor %}
+    <br>
+    {% for message in messages %}
+        <strong>{{ message }}</strong>
+    {% endfor %}
+
+{% endblock %}
