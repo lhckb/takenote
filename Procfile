@@ -1,1 +1,1 @@
-web: gunicorn takenote.takenote.wsgi
+web: gunicorn takenote.wsgi
