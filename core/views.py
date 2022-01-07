@@ -71,14 +71,28 @@ def addNote(request):
 
 @login_required(login_url = '/login/')
 def deleteNote(request, id):
-    Note.objects.filter(id = id).delete()
-    return redirect('/notes/')
+    user = request.user
+    note = Note.objects.filter(id = id, user = user)
+
+    if note:
+        return redirect('/notes/')
+
+    else:
+        messages.error(request, 'Invalid ID.')
+        return redirect('/notes/')
 
 
 @login_required(login_url = '/login/')
 def updatePage(request, id):
-    note = Note.objects.filter(id = id)
-    return render(request, 'update.html', {'note':note})
+    user = request.user
+    note = Note.objects.filter(id = id, user = user)
+
+    if note:
+        return render(request, 'update.html', {'note':note})
+        
+    else:
+        messages.error(request, 'Invalid ID.')
+        return redirect('/notes/')
 
 
 @login_required(login_url = '/login/')

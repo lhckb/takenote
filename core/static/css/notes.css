@@ -28,13 +28,14 @@ a {
     padding: 10px;
 }
 
-a:active {
-    color: white;
+a:link {
+    color: #277e87;
 }
 
 a:visited {
-    color: #277e87;
+    color: white;
 }
+
 
 input {
     padding: 5px;
