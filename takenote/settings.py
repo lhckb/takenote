@@ -2,6 +2,7 @@
 from pathlib import Path
 import os
 import socket
+import django_on_heroku
 
 if socket.gethostname() == 'lhckb':
     from .local_settings import *
@@ -135,3 +136,5 @@ LOGGING = {
         'level': 'DEBUG',
     },
 }
+
+django_on_heroku.settings(locals())
