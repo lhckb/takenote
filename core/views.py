@@ -78,7 +78,6 @@ def deleteNote(request, id):
         return redirect('/notes/')
 
     else:
-        messages.error(request, 'Invalid ID.')
         return redirect('/notes/')
 
 
@@ -89,9 +88,8 @@ def updatePage(request, id):
 
     if note:
         return render(request, 'update.html', {'note':note})
-        
+
     else:
-        messages.error(request, 'Invalid ID.')
         return redirect('/notes/')
 
 

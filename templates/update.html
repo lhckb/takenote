@@ -14,7 +14,7 @@
 <div class="wrapper">
 
     <div class="title">
-        <h1 class="headerAnchor" onclick="redirectIndex()">TakeNote</h1>
+        <h1 onmouseenter="raiseAnchor()" onmouseleave="lowerAnchor()" class="headerAnchor" id="headerAnchor" onclick="redirectIndex()">TakeNote</h1>
     </div>
 
     <div class="pageTitle">
@@ -29,6 +29,9 @@
     </div>
 
 </div>
+    {% for message in messages %}
+        <strong>{{ message }}</strong>
+    {% endfor %}
 
     {% for i in note %}
         <div id="" class="newNote">
@@ -44,8 +47,5 @@
         <button style="text-align: center;" onclick="redirectNotes()">Cancel</button>
     {% endfor %}
     <br>
-    {% for message in messages %}
-        <strong>{{ message }}</strong>
-    {% endfor %}
 
 {% endblock %}

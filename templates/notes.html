@@ -30,6 +30,10 @@
 
 </div>
 
+    {% for message in messages %}
+        <strong>{{ message }}</strong>
+    {% endfor %}
+
 
     <div id="" class="newNote">
         <form action="/notes/add" method="POST"> {% csrf_token %}
@@ -42,10 +46,6 @@
             
         </form> 
     </div>
-
-    {% for message in messages %}
-        <strong>{{ message }}</strong>
-    {% endfor %}
 
     <div class="notes">
         {% for note in notes %}
