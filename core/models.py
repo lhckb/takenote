@@ -5,7 +5,7 @@ from django.contrib.auth.models import User  # in order to use django admin stan
 class Note(models.Model):
     title = models.CharField(max_length = 200)
     text = models.TextField(null = False)
-    pinned = models.BooleanField(blank = True, null = True)
+    pinned = models.BooleanField(default = False)
     date_created = models.DateTimeField(auto_now = True)
     user = models.ForeignKey(User, on_delete = models.CASCADE)
 

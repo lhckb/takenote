@@ -48,7 +48,7 @@ def submitAccountUpdate(request):
 def notesPage(request):
     current_user = request.user
     notes = Note.objects.filter(user = current_user)
-    notes = notes.order_by('-date_created')
+    notes = notes.order_by('-pinned', '-date_created')
     return render(request, 'notes.html', {'notes' : notes})
 
 
@@ -75,6 +75,7 @@ def deleteNote(request, id):
     note = Note.objects.filter(id = id, user = user)
 
     if note:
+        note.delete()
         return redirect('/notes/')
 
     else:
@@ -228,8 +229,18 @@ def submitRegisterPage(request):
     return redirect('/notes/')  
 
 
-def pin(request):
-    pass
+@login_required(login_url = '/login/')
+def togglePin(request, id):
+    user = request.user
+    note = Note.objects.filter(id = id, user = user)
+    if Note.objects.filter(id = id, user = user, pinned = True):
+        note.update(pinned = False)
+       
+    elif Note.objects.filter(id = id, user = user, pinned = False):
+        note.update(pinned = True)
+
+    return redirect('/notes/')
+
 
 
 # TODO add exception treatment

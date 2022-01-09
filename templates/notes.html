@@ -50,6 +50,7 @@
     <div class="notes">
         {% for note in notes %}
         <div class="note" id="{{ note.id }}" onmouseenter="hoverIn(this.id)" onmouseleave="hoverOut(this.id)">
+
             <div class="noteItems" onclick="redirectUpdate('{{ note.id }}')">
                 <h5>{{ note.getCreationDate }}</h5>
                 <h4>{{ note.title }}</h4>
@@ -60,6 +61,12 @@
                 {% load static %}
                 <img onclick="deleteConfirmation('{{ note.id }}')" src="{% static 'images/trash-can.png' %}" alt="trash can icon">
                 <img onclick="redirectUpdate('{{ note.id }}')" src="{% static 'images/pen.png' %}" alt="pen icon">
+                {% if note.pinned %}
+                <img onclick="togglePin('{{ note.id }}')" src="{% static 'images/pinblack.png' %}" alt="pin image">
+                {% else %}
+                <img onclick="togglePin('{{ note.id }}')" src="{% static 'images/pinwhite.png' %}" alt="pin image">
+                {% endif %}
+
             </div>
         </div>
     {% endfor %}

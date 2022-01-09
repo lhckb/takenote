@@ -119,6 +119,7 @@ textarea {
     box-shadow: 2px 2px black;
     padding: 10px;
     margin: 25px;
+    height: fit-content;
 }
 
 .noteItems {

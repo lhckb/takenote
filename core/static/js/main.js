@@ -52,3 +52,8 @@ function lowerAnchor() {
     anchor.style.backgroundColor = ''
     anchor.style.color = ''
 }
+
+function togglePin(id) {
+    let note = document.getElementById(id)
+    window.location.href = `/notes/togglepin/${id}`
+}

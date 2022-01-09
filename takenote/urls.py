@@ -34,5 +34,5 @@ urlpatterns = [
     path('notes/delete/<int:id>', views.deleteNote),
     path('notes/update/<int:id>/', views.updatePage),
     path('notes/update/<int:id>/submit', views.submitUpdate),
-    path('notes/<int:id>/pin', views.pin)
+    path('notes/togglepin/<int:id>', views.togglePin)
 ]
