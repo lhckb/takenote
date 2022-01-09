@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>TakeNote | Login</title>
-    {% load static %}
-    <script src="{% static 'js/main.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/login-register.css' %}">
+
+<title>TakeNote | Login</title>
+{% load static %}
+<script src="{% static 'js/main.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/login-register.css' %}">
+
 {% endblock %}
 
 {% block body %}
@@ -23,33 +25,28 @@
     </div>
 
 </div>
-    <div class="container">
-        <div>
-            <h1>Login to your account</h1>
-            <form action="/login/submit/loginpage", method="POST"> {% csrf_token %}
-    
-                <input type="text" name="username" placeholder="Username">
-    
-                <input type="password" name="password" placeholder="Password">
-                <br>
-                <button type="submit">Login</button>
-    
-            </form>
 
+<div class="container">
+    <div>
+        <h1>Login to your account</h1>
+        <form action="/login/submit/loginpage", method="POST"> {% csrf_token %}
+            <input type="text" name="username" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
             <br>
-            {% for message in messages %}
-                <strong><h1>{{ message }}</h1></strong>
-                <br>
-            {% endfor %}
+            <button type="submit">Login</button>
+        </form>
 
+        <br>
+
+        {% for message in messages %}
+            <strong><h1>{{ message }}</h1></strong>
             <br>
-            <a href="/register/">Create account, if you don't have one.</a>
-            
-        </div>
+        {% endfor %}
+
+        <br>
+
+        <a href="/register/">Create account, if you don't have one.</a>
     </div>
-
-    
-
-
+</div>
 
 {% endblock %}

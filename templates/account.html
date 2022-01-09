@@ -2,11 +2,10 @@
 
 {% block head %}
 
-    <title>TakeNote | {{ request.user }}</title>
-    {% load static %}
-    <script src="{% static 'js/main.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/account.css' %}">
-    
+<title>TakeNote | {{ request.user }}</title>
+{% load static %}
+<script src="{% static 'js/main.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/account.css' %}">
 
 {% endblock %}
 
@@ -25,42 +24,41 @@
         <a href="/notes/">Notes</a>
         <br>
         <a href="/logout">Logout</a>
-
     </div>
 
 </div>
 
-    <div class="actions">
-        {% for i in user %}
-        <div class="changeUsername">
-            <form action="/account/update/username" method="POST"> {% csrf_token %}
-                <input type="text" name="username" value="{{ i.username }}">
-                <br>
-                <button type="submit">Change Username</button>
-            </form>
-        </div>
-    
-        <div class="changePassword">
-            <form action="/account/update/password" method="POST"> {% csrf_token %}
-                <input type="password" name="password" placeholder="Change password">
-                <br>
-                <input type="password" name="confirmPassw" placeholder="Confirm New Password">
-                <br>
-                <button type="submit">Change password</button>
-            </form>
-        </div>
-        {% endfor %}
+<div class="actions">
+    {% for i in user %}
+    <div class="changeUsername">
+        <form action="/account/update/username" method="POST"> {% csrf_token %}
+            <input type="text" name="username" value="{{ i.username }}">
+            <br>
+            <button type="submit">Change Username</button>
+        </form>
     </div>
 
-    <br>
-    {% for message in messages %}
-        <strong>{{ message }}</strong>
-        <br>
+    <div class="changePassword">
+        <form action="/account/update/password" method="POST"> {% csrf_token %}
+            <input type="password" name="password" placeholder="Change password">
+            <br>
+            <input type="password" name="confirmPassw" placeholder="Confirm New Password">
+            <br>
+            <button type="submit">Change password</button>
+        </form>
+    </div>
     {% endfor %}
+</div>
 
+<br>
+
+{% for message in messages %}
+    <strong>{{ message }}</strong>
     <br>
+{% endfor %}
 
-    <button onclick="accountDelConfirmation('{{ request.user }}')" class="deleteAccount">Delete Account</button>
+<br>
 
-    
+<button onclick="accountDelConfirmation('{{ request.user }}')" class="deleteAccount">Delete Account</button>
+
 {% endblock %}

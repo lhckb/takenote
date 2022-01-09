@@ -20,9 +20,6 @@ function deleteConfirmation(note_id) {
     if (window.confirm('Delete this note? You can\'t undo this.') == true) {
         window.location.href = `/notes/delete/${note_id}`
     }
-    else {
-        console.log('not')
-    }
 }
 
 function enterUpdatePage(note_id) {
@@ -43,18 +40,21 @@ function redirectUpdate(id) {
 
 function raiseAnchor() {
     let anchor = document.getElementById('headerAnchor')
+
     anchor.style.backgroundColor = 'white'
     anchor.style.color = 'black'
 }
 
 function lowerAnchor() {
     let anchor = document.getElementById('headerAnchor')
+
     anchor.style.backgroundColor = ''
     anchor.style.color = ''
 }
 
 function togglePin(id) {
     let note = document.getElementById(id)
+    
     window.location.href = `/notes/togglepin/${id}`
 }
 

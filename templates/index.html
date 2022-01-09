@@ -2,16 +2,15 @@
 
 {% block head %}
 
-    <title>TakeNote</title>
-    {% load static %}
-    <script src="{% static 'js/main.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+<title>TakeNote</title>
+{% load static %}
+<script src="{% static 'js/main.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 
 {% endblock %}
 
 {% block body %}
 <div class="wrapper">
-
     <div class="title">
     </div>
 
@@ -22,20 +21,17 @@
     <div class="logout">
         <a href="/notes/">Notes</a>
     </div>
-
 </div>
 
 <div class="options">
     <div class="loginWrapper">
         <h1>Login to your account</h1>
         <form action="/login/submit/index", method="POST"> {% csrf_token %}
-
             <input type="text" name="username" placeholder="Username">
             <br>
             <input type="password" name="password" placeholder="Password">
             <br>
             <button type="submit">Login</button>
-
         </form>
     </div>
 
@@ -51,14 +47,11 @@
             <h1>Welcome!</h1>
         </div>
         {% endif %}
-
     </div>
-
 
     <div class="registerWrapper">
         <h1>Create an account</h1>
         <form action="/register/submit/index", method="POST"> {% csrf_token %}
-
             <input type="text" name="username" placeholder="Username">
             <br>
             <input type="password" name="password" placeholder="Password">
@@ -66,9 +59,7 @@
             <input type="password" name="confirmPassw" placeholder="Confirm password">
             <br>
             <button type="submit">Sign Up</button>
-
         </form>
     </div>
-
 </div>
 {% endblock %}

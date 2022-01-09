@@ -2,17 +2,15 @@
 
 {% block head %}
 
-    <title>TakeNote | {{ request.user }}</title>
-    {% load static %}
-    <script src="{% static 'js/main.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/notes.css' %}">
+<title>TakeNote | {{ request.user }}</title>
+{% load static %}
+<script src="{% static 'js/main.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/notes.css' %}">
     
-
 {% endblock %}
 
 {% block body %}
 <div class="wrapper">
-
     <div class="title">
         <h1 onmouseenter="raiseAnchor()" onmouseleave="lowerAnchor()" class="headerAnchor" id="headerAnchor" onclick="redirectIndex()">TakeNote</h1>
     </div>
@@ -25,51 +23,45 @@
         <a href="/account/">Account</a>
         <br>
         <a href="/logout">Logout</a>
-
     </div>
-
 </div>
 
-    {% for message in messages %}
-        <strong>{{ message }}</strong>
-    {% endfor %}
+{% for message in messages %}
+    <strong>{{ message }}</strong>
+{% endfor %}
 
+<div id="" class="newNote">
+    <form action="/notes/add" method="POST"> {% csrf_token %}
+        <input type="text" name="title" placeholder="Title">
+        <br>
+        <textarea name="text" id="text" cols="30" rows="10" placeholder="Note goes here"></textarea>
+        <br>
+        <button type="submit">Add Note</button>
+    </form> 
+</div>
 
-    <div id="" class="newNote">
-        <form action="/notes/add" method="POST"> {% csrf_token %}
-
-            <input type="text" name="title" placeholder="Title">
-            <br>
-            <textarea name="text" id="text" cols="30" rows="10" placeholder="Note goes here"></textarea>
-            <br>
-            <button type="submit">Add Note</button>
-            
-        </form> 
-    </div>
-
-    <div class="notes">
-        {% for note in notes %}
-        <div class="note" id="{{ note.id }}" onmouseenter="hoverIn(this.id)" onmouseleave="hoverOut(this.id)">
-
-            <div class="noteItems" onclick="redirectUpdate('{{ note.id }}')">
-                <h5>{{ note.getCreationDate }}</h5>
-                <h4>{{ note.title }}</h4>
-                <p>{{ note.text }}</p>
-            </div>
-
-            <div  class="actions" id="actions{{ note.id }}">
-                {% load static %}
-                <img onclick="deleteConfirmation('{{ note.id }}')" src="{% static 'images/trash-can.png' %}" alt="trash can icon">
-                <img onclick="redirectUpdate('{{ note.id }}')" src="{% static 'images/pen.png' %}" alt="pen icon">
-                {% if note.pinned %}
-                <img onclick="togglePin('{{ note.id }}')" src="{% static 'images/pinblack.png' %}" alt="pin image">
-                {% else %}
-                <img onclick="togglePin('{{ note.id }}')" src="{% static 'images/pinwhite.png' %}" alt="pin image">
-                {% endif %}
-
-            </div>
+<div class="notes">
+    {% for note in notes %}
+    <div class="note" id="{{ note.id }}" onmouseenter="hoverIn(this.id)" onmouseleave="hoverOut(this.id)">
+        <div class="noteItems" onclick="redirectUpdate('{{ note.id }}')">
+            <h5>{{ note.getCreationDate }}</h5>
+            <h4>{{ note.title }}</h4>
+            <p>{{ note.text }}</p>
         </div>
-    {% endfor %}
+
+        <div  class="actions" id="actions{{ note.id }}">
+            {% load static %}
+            <img onclick="deleteConfirmation('{{ note.id }}')" src="{% static 'images/trash-can.png' %}" alt="trash can icon">
+            <img onclick="redirectUpdate('{{ note.id }}')" src="{% static 'images/pen.png' %}" alt="pen icon">
+            {% if note.pinned %}
+            <img onclick="togglePin('{{ note.id }}')" src="{% static 'images/pinblack.png' %}" alt="pin image">
+            {% else %}
+            <img onclick="togglePin('{{ note.id }}')" src="{% static 'images/pinwhite.png' %}" alt="pin image">
+            {% endif %}
+
+        </div>
     </div>
+{% endfor %}
+</div>
     
 {% endblock %}
