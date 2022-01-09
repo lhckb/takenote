@@ -1,33 +1,92 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
+    text-align: center;
+    overflow-y: scroll;
+    min-height: 100%;
+    background-color: #202124;
+    /*background-image: url('/static/images/notebook.png');*/
+    background-size: cover;
+    opacity: 95%;
+    color: white;
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 100px; /* Set same as footer's height */
+}
+
+button {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+
 }
 
 a {
-    margin-right: 20px;
-    margin-top: 10px;
+    padding: 10px;
+}
+
+a:link {
+    color: #277e87;
+}
+
+a:visited {
+    color: white;
+}
+
+input {
+    padding: 5px;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+}
+
+.headerAnchor {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 4px;
 }
 
 .wrapper {
-    background-color: cyan;
+    background-color: #000000;
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    height: 100px;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .logout {
     display: flex;
     justify-content: flex-end;
-    width: 100%;
+    width: 33%;
     height: fit-content;
+}
+
+.title {
+    display: flex;
+    justify-content: flex-start;
+    width: 33%;
 }
 
 .pageTitle {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: 33%;
 }
 
-.info {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    padding-top: 20px;
+.changeUsername {
+    padding-bottom: 10px;
+}
+
+.changePassword {
+    padding-top: 10px;
+}
+
+.deleteAccount {
+    background-color: Red;
+    color: white;
 }

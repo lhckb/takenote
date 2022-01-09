@@ -57,3 +57,9 @@ function togglePin(id) {
     let note = document.getElementById(id)
     window.location.href = `/notes/togglepin/${id}`
 }
+
+function accountDelConfirmation(user) {
+    if (window.confirm('Are you sure you want to delete your account? YOU CANNOT UNDO THIS')) {
+        window.location.href = `/account/delete/${user}`
+    }
+}

@@ -21,27 +21,65 @@ def accountPage(request):
 
 
 @login_required(login_url = '/login/')
-def submitAccountUpdate(request):
+def submitUsernameUpdate(request):
     curr_user = request.user
     user = User.objects.filter(username = curr_user)
 
     if request.POST:
+        new_username = request.POST.get('username')
+        if new_username != ('' and curr_user):
+            if not User.objects.filter(username = new_username):
+                user.update(username = new_username)
+                messages.success(request, 'Username changed successfully.')
+            
+            else:
+                messages.error(request, 'Username already exists.')
 
-        username = request.POST.get('username')
-        if not User.objects.filter(username = username):
-            user.username = username
-            #user.save()
-            messages.success(request, 'Username updated!')
+        else:
+            messages.error(request, 'Invalid username.')
 
-        
-        password = request.POST.get('password')
-        passw_confirm = request.POST.get('confirmPassw')
-        # if password == passw_confirm:
-        #     if not User.objects.filter(username = curr_user, password = password):
-        #         curr_user.set_password(password = password)
-        #         messages.success(request, 'Password updated successfully!')
 
     return redirect('/account/')
+
+
+@login_required(login_url = '/login/')
+def submitPasswordUpdate(request):
+    curr_user = request.user
+    user = User.objects.get(username = curr_user)
+
+    if request.POST:
+        new_passw = request.POST.get('password')
+        new_passw_confirm = request.POST.get('confirmPassw')
+
+        if new_passw != '':
+            if new_passw == new_passw_confirm:
+                user.set_password(new_passw)
+                user.save()
+                messages.success(request, 'Password changed successfully.')
+            
+            else:
+                messages.error(request, 'Passwords don\'t match')
+
+        else:
+            messages.error(request, 'Password cannot be empty')
+
+
+    return redirect('/account/')
+
+
+@login_required(login_url = '/login/')
+def deleteAccount(request, username):
+    request_user = request.user
+    user_to_del = User.objects.get(username = username)
+
+    if request_user == user_to_del:
+        user_to_del.delete()
+        messages.success(request, 'Account deleted successfully.')
+    
+    else:
+        messages.error(request, 'couldnt delete')
+
+    return redirect('/')
 
 
 @login_required(login_url = '/login/')
